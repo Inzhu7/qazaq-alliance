@@ -1,0 +1,360 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Qazaq Alliance Анкета</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@500;700;800&display=swap">
+<style>
+/* Layout: одна узкая колонка, один раздел на экран, тонкая полоса прогресса сверху.
+   Палитра: чернила, холодный белый, небесно-голубой акцент (цвет казахстанского флага). */
+:root{
+  --bg:#f6f8fa; --surface:#ffffff; --fg:#0f1b26; --muted:#5b6b7a; --line:#dde4ea;
+  --accent:#1a8fb8; --accent-fg:#ffffff; --accent-soft:#e3f2f8; --danger:#c0392b;
+  --font-body:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --font-head:"Manrope","Inter",system-ui,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#0c141b; --surface:#131e27; --fg:#e8eef3; --muted:#93a4b2; --line:#24333f;
+  --accent:#4fb8dc; --accent-fg:#06222d; --accent-soft:#12303c; --danger:#ff7b6b}
+ html{color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0c141b; --surface:#131e27; --fg:#e8eef3; --muted:#93a4b2; --line:#24333f;
+  --accent:#4fb8dc; --accent-fg:#06222d; --accent-soft:#12303c; --danger:#ff7b6b; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{margin:0}
+html{color-scheme:light}
+body{background:var(--bg);color:var(--fg);font-family:var(--font-body);font-size:16px;line-height:1.5;
+  padding-block:20px 56px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:600px;margin:0 auto}
+header{display:flex;align-items:center;gap:12px;margin-bottom:20px}
+.mark{width:40px;height:40px;flex:none}
+.brand{font-family:var(--font-head);font-weight:800;font-size:17px;letter-spacing:.01em;line-height:1.1}
+.brand small{display:block;font-family:var(--font-body);font-weight:500;font-size:12px;color:var(--muted);letter-spacing:.04em;margin-top:2px}
+.bar{height:3px;background:var(--line);border-radius:2px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--accent);transition:width .25s}
+.meta{display:flex;justify-content:space-between;gap:12px;font-size:13px;color:var(--muted);margin:10px 0 22px}
+h1{font-family:var(--font-head);font-weight:800;font-size:28px;line-height:1.15;margin:0 0 6px;text-wrap:balance}
+.lead{color:var(--muted);margin:0 0 24px;max-width:52ch}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:20px;display:flex;flex-direction:column;gap:18px}
+.field{display:flex;flex-direction:column;gap:6px;min-width:0}
+label,.lbl{font-weight:600;font-size:15px}
+.hint{font-size:13px;color:var(--muted)}
+.req{color:var(--accent)}
+input,select,textarea{font:inherit;color:var(--fg);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:12px;width:100%;min-width:0}
+textarea{min-height:88px;resize:vertical}
+input:focus,select:focus,textarea:focus,button:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.field.err input,.field.err select,.field.err textarea{border-color:var(--danger)}
+.msg{display:none;color:var(--danger);font-size:13px}
+.field.err .msg{display:block}
+.seg{display:flex;gap:8px}
+.seg button{flex:1;font:inherit;font-weight:500;padding:11px;border-radius:8px;border:1px solid var(--line);background:var(--bg);color:var(--fg);cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-fg)}
+.nav{display:flex;gap:10px;margin-top:22px}
+.btn{font:inherit;font-weight:600;padding:13px 20px;border-radius:8px;border:1px solid var(--accent);background:var(--accent);color:var(--accent-fg);cursor:pointer;flex:1}
+.btn.ghost{background:transparent;color:var(--fg);border-color:var(--line);flex:none}
+.btn[disabled]{opacity:.5;cursor:default}
+.sum h2{font-family:var(--font-head);font-size:14px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0 0 8px}
+.sum dl{margin:0;display:grid;grid-template-columns:minmax(0,1fr);gap:8px}
+.sum dt{font-size:13px;color:var(--muted)}
+.sum dd{margin:0;overflow-wrap:anywhere}
+.chk{display:flex;gap:10px;align-items:flex-start;font-size:14px}
+.chk input{width:20px;height:20px;margin-top:2px;flex:none;accent-color:var(--accent)}
+.code{font-family:var(--font-head);font-weight:800;font-size:32px;letter-spacing:.12em;color:var(--accent)}
+ul.todo{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px}
+pre.copy{white-space:pre-wrap;overflow-wrap:anywhere;font:13px/1.5 var(--font-body);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:12px;max-height:220px;overflow:auto;margin:0}
+.list{display:flex;flex-direction:column;gap:12px;margin:14px 0 20px}
+.item{gap:10px;padding:16px}
+.itop{display:flex;justify-content:space-between;gap:12px;align-items:baseline}
+.tag{font-family:var(--font-head);font-weight:700;font-size:13px;letter-spacing:.1em;color:var(--accent)}
+.back{display:inline-block;color:var(--accent);font-weight:600;text-decoration:none;margin-top:6px}
+@media (prefers-reduced-motion:reduce){.bar i{transition:none}}
+@media (max-width:420px){h1{font-size:24px}.card{padding:16px}}
+</style>
+
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <!-- Место логотипа: замените этот знак на логотип компании -->
+    <svg class="mark" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="none" stroke="var(--accent)" stroke-width="2.5"/><path d="M20 9v22M9 20h22" stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round" opacity=".35"/><circle cx="20" cy="20" r="5" fill="var(--accent)"/></svg>
+    <div class="brand">Qazaq Alliance<small>Визовая поддержка · США</small></div>
+  </header>
+  <div class="bar" aria-hidden="true"><i id="prog"></i></div>
+  <div class="meta"><span id="step-label"></span><span id="step-name"></span></div>
+  <main id="stage"></main>
+</div>
+
+<script>
+(function(){
+  var yn=function(id,label,did,dlabel,hint){
+    return [{id:id,label:label,type:'yn',req:true},
+            {id:did,label:dlabel,type:'ta',req:true,hint:hint,showIf:function(d){return d[id]==='Да'}}];
+  };
+  var flat=function(a){return [].concat.apply([],a)};
+
+  var S=[
+  {name:'О вас',title:'Расскажите о себе',lead:'Данные пишите так, как указано в загранпаспорте.',fields:flat([[
+    {id:'surname',label:'Фамилия (латиницей)',type:'text',req:true,ph:'IVANOV',hint:'Как в загранпаспорте'},
+    {id:'given',label:'Имя (латиницей)',type:'text',req:true,ph:'IVAN'},
+    {id:'native',label:'Полное имя на родном языке',type:'text',req:true,ph:'Иванов Иван Иванович'},
+    {id:'sex',label:'Пол',type:'sel',req:true,opts:['Мужской','Женский']},
+    {id:'marital',label:'Семейное положение',type:'sel',req:true,opts:['Холост / не замужем','Женат / замужем','Гражданский брак','В разводе','Вдовец / вдова','Раздельное проживание']},
+    {id:'dob',label:'Дата рождения',type:'date',req:true},
+    {id:'bcity',label:'Город рождения',type:'text',req:true},
+    {id:'bregion',label:'Область / регион рождения',type:'text',req:true},
+    {id:'bcountry',label:'Страна рождения',type:'text',req:true},
+    {id:'nation',label:'Гражданство',type:'text',req:true,ph:'Казахстан'},
+    {id:'iin',label:'ИИН',type:'text',req:true,ph:'12 цифр',hint:'Индивидуальный идентификационный номер'}],
+    yn('othername','Использовали ли вы другие имена или фамилии?','othername_d','Укажите прежнее имя или фамилию'),
+    yn('othernat','Есть ли у вас другое гражданство?','othernat_d','Какое гражданство'),
+    yn('otherres','Вы постоянно проживаете в другой стране?','otherres_d','В какой стране и с какого года')])},
+
+  {name:'Поездка',title:'О вашей поездке',lead:'Если точных планов нет, укажите примерные.',fields:flat([[
+    {id:'purpose',label:'Цель поездки',type:'sel',req:true,opts:['Туризм / отдых (B2)','Деловая поездка (B1)','Лечение (B2)','Визит к родным или друзьям (B2)','Другое']},
+    {id:'arrival',label:'Планируемая дата въезда',type:'date',req:true},
+    {id:'stay',label:'Сколько планируете пробыть',type:'text',req:true,ph:'Например, 14 дней'},
+    {id:'usaddr',label:'Где остановитесь в США',type:'ta',req:true,hint:'Отель или адрес, город, штат'},
+    {id:'payer',label:'Кто оплачивает поездку',type:'sel',req:true,opts:['Я сам(а)','Другой человек','Компания']},
+    {id:'payer_d',label:'Данные плательщика',type:'ta',req:true,hint:'Имя или название, кем приходится, телефон',showIf:function(d){return d.payer&&d.payer!=='Я сам(а)'}}],
+    yn('comp','Едете ли вы с кем-то?','comp_d','Имена спутников и кем они вам приходятся'),
+    yn('prevus','Были ли вы раньше в США?','prevus_d','Когда и на какой срок'),
+    yn('prevvisa','Выдавалась ли вам виза США?','prevvisa_d','Дата выдачи, тип визы, номер (если помните)'),
+    yn('refused','Отказывали ли вам в визе США или во въезде?','refused_d','Когда и по какой причине'),
+    yn('lostvisa','Вашу визу США теряли или крали?','lostvisa_d','Что произошло и когда'),
+    yn('usdl','Есть ли у вас водительские права США?','usdl_d','Номер и штат')])},
+
+  {name:'Контакты',title:'Как с вами связаться',lead:'Эти данные попадут в анкету DS-160.',fields:[
+    {id:'addr',label:'Домашний адрес',type:'ta',req:true,hint:'Улица, дом, квартира, город, область, индекс'},
+    {id:'phone',label:'Основной телефон',type:'tel',req:true,ph:'+7 ...'},
+    {id:'phone2',label:'Дополнительный телефон',type:'tel',ph:'Если есть'},
+    {id:'email',label:'Электронная почта',type:'email',req:true,ph:'name@mail.com'},
+    {id:'oldcontacts',label:'Другие номера и почты за последние 5 лет',type:'ta',hint:'Если не было, оставьте пустым'},
+    {id:'social',label:'Соцсети за последние 5 лет',type:'ta',req:true,hint:'Платформа и ник, например: Instagram, @name. Если нет, напишите «нет»'}]},
+
+  {name:'Паспорт',title:'Загранпаспорт',lead:'Срок действия паспорта должен быть не менее 6 месяцев после поездки.',fields:flat([[
+    {id:'ppnum',label:'Номер паспорта',type:'text',req:true},
+    {id:'ppcountry',label:'Страна выдачи',type:'text',req:true,ph:'Казахстан'},
+    {id:'ppcity',label:'Город выдачи',type:'text',req:true},
+    {id:'ppissue',label:'Дата выдачи',type:'date',req:true},
+    {id:'ppexp',label:'Дата окончания',type:'date',req:true}],
+    yn('pplost','Теряли ли вы паспорт или его крали?','pplost_d','Номер утерянного паспорта, дата и страна')])},
+
+  {name:'Контакт в США',title:'Кто вас ждёт в США',lead:'Знакомый, родственник, отель или организация. Если никого нет, оставьте пустым.',fields:[
+    {id:'ucname',label:'Имя человека или название отеля',type:'text'},
+    {id:'ucrel',label:'Кем приходится вам',type:'text',ph:'Друг, родственник, отель, партнёр'},
+    {id:'ucaddr',label:'Адрес в США',type:'ta'},
+    {id:'ucphone',label:'Телефон',type:'tel'},
+    {id:'ucemail',label:'Электронная почта',type:'email'}]},
+
+  {name:'Семья',title:'Ваша семья',lead:'Нужны имена и даты рождения ближайших родственников.',fields:flat([[
+    {id:'fname',label:'Отец: полное имя',type:'text',req:true},
+    {id:'fdob',label:'Отец: дата рождения',type:'date'}],
+    yn('fus','Отец находится в США?','fus_d','Его статус в США'),
+  [{id:'mname',label:'Мать: полное имя',type:'text',req:true},
+   {id:'mdob',label:'Мать: дата рождения',type:'date'}],
+    yn('mus','Мать находится в США?','mus_d','Её статус в США'),
+  [{id:'sname',label:'Супруг(а): полное имя',type:'text',req:true,showIf:function(d){return d.marital==='Женат / замужем'||d.marital==='Гражданский брак'}},
+   {id:'sdob',label:'Супруг(а): дата рождения',type:'date',showIf:function(d){return d.marital==='Женат / замужем'||d.marital==='Гражданский брак'}},
+   {id:'snat',label:'Супруг(а): гражданство и город рождения',type:'text',showIf:function(d){return d.marital==='Женат / замужем'||d.marital==='Гражданский брак'}}],
+    yn('kids','Есть ли у вас дети?','kids_d','Имя и дата рождения каждого ребёнка'),
+    yn('relus','Есть ли у вас близкие родственники в США?','relus_d','Кто они, где живут и их статус (гражданин, резидент, виза)')])},
+
+  {name:'Работа',title:'Работа и учёба',lead:'Опишите текущее занятие и последние 5 лет.',fields:flat([[
+    {id:'occ',label:'Чем вы занимаетесь',type:'sel',req:true,opts:['Работаю по найму','Предприниматель / ИП','Студент','Пенсионер','Домохозяйка','Не работаю']},
+    {id:'emp',label:'Компания или учебное заведение',type:'text',req:true,showIf:function(d){return ['Работаю по найму','Предприниматель / ИП','Студент'].indexOf(d.occ)>-1}},
+    {id:'empaddr',label:'Адрес',type:'ta',req:true,showIf:function(d){return ['Работаю по найму','Предприниматель / ИП','Студент'].indexOf(d.occ)>-1}},
+    {id:'empphone',label:'Телефон',type:'tel',showIf:function(d){return ['Работаю по найму','Предприниматель / ИП','Студент'].indexOf(d.occ)>-1}},
+    {id:'pos',label:'Должность или специальность',type:'text',req:true,showIf:function(d){return ['Работаю по найму','Предприниматель / ИП','Студент'].indexOf(d.occ)>-1}},
+    {id:'since',label:'С какой даты',type:'date',showIf:function(d){return ['Работаю по найму','Предприниматель / ИП','Студент'].indexOf(d.occ)>-1}},
+    {id:'income',label:'Доход в месяц',type:'text',ph:'Сумма и валюта',showIf:function(d){return ['Работаю по найму','Предприниматель / ИП'].indexOf(d.occ)>-1}},
+    {id:'duties',label:'Чем занимаетесь на работе',type:'ta',showIf:function(d){return ['Работаю по найму','Предприниматель / ИП'].indexOf(d.occ)>-1}}],
+    yn('prevjob','Были ли другие места работы за последние 5 лет?','prevjob_d','Компания, должность, даты работы'),
+  [{id:'edu',label:'Образование',type:'ta',req:true,hint:'Учебное заведение, город, специальность, годы обучения'}]])},
+
+  {name:'Дополнительно',title:'Дополнительные вопросы',lead:'Отвечайте честно. Ошибки и неточности могут привести к отказу.',fields:flat([[
+    {id:'countries',label:'Страны, где вы были за последние 5 лет',type:'ta',req:true},
+    {id:'langs',label:'Языки, на которых вы говорите',type:'text',req:true,ph:'Казахский, русский, английский'}],
+    yn('mil','Служили ли вы в армии?','mil_d','Страна, род войск, годы службы'),
+    yn('org','Состояли ли вы в общественных или профессиональных организациях?','org_d','Название и период'),
+    yn('crim','Были ли вы когда-либо арестованы или осуждены?','crim_d','Когда, где и за что'),
+    yn('deport','Вас депортировали или вы нарушали срок пребывания в какой-либо стране?','deport_d','Страна, год, обстоятельства'),
+    yn('serious','Были ли вы связаны с наркотиками, торговлей людьми, терроризмом или мошенничеством при получении виз?','serious_d','Опишите ситуацию'),
+    yn('health','Есть ли у вас инфекционное заболевание или расстройство, которое может быть опасно для окружающих?','health_d','Подробности')])}
+  ];
+
+  // Номер WhatsApp менеджера в международном формате без плюса, например 77001234567
+  var WA_NUMBER='77066184559';
+  var data={}, step=0, stage=document.getElementById('stage');
+  var KEY='qa-ds160-draft';
+  try{var raw=localStorage.getItem(KEY); if(raw) data=JSON.parse(raw)||{};}catch(e){}
+  var save=function(){try{localStorage.setItem(KEY,JSON.stringify(data))}catch(e){}};
+
+  var vis=function(f){return !f.showIf||f.showIf(data)};
+  var el=function(t,c,x){var e=document.createElement(t); if(c)e.className=c; if(x!=null)e.textContent=x; return e};
+
+  function setHead(){
+    var total=S.length+1;
+    document.getElementById('prog').style.width=Math.round((step+1)/total*100)+'%';
+    document.getElementById('step-label').textContent='Шаг '+(step+1)+' из '+total;
+    document.getElementById('step-name').textContent=step<S.length?S[step].name:'Проверка';
+  }
+
+  function control(f){
+    var v=data[f.id]||'', c;
+    if(f.type==='yn'){
+      c=el('div','seg');
+      ['Да','Нет'].forEach(function(o){
+        var b=el('button',null,o); b.type='button'; b.setAttribute('aria-pressed',String(v===o));
+        b.onclick=function(){data[f.id]=o;save();render()};
+        c.appendChild(b);
+      });
+      return c;
+    }
+    if(f.type==='sel'){
+      c=el('select'); c.id=f.id;
+      var p=el('option','', 'Выберите'); p.value=''; c.appendChild(p);
+      f.opts.forEach(function(o){var op=el('option','',o); op.value=o; c.appendChild(op)});
+      c.value=v;
+      c.onchange=function(){data[f.id]=c.value;save();render()};
+      return c;
+    }
+    c=f.type==='ta'?el('textarea'):el('input');
+    c.id=f.id;
+    if(f.type!=='ta') c.type=f.type;
+    if(f.ph) c.placeholder=f.ph;
+    c.value=v;
+    c.oninput=function(){data[f.id]=c.value;save();c.parentNode.classList.remove('err')};
+    return c;
+  }
+
+  function render(){
+    setHead();
+    stage.textContent='';
+    window.scrollTo(0,0);
+    if(step<S.length) renderStep(S[step]); else renderReview();
+  }
+
+  function renderStep(s){
+    stage.appendChild(el('h1',null,s.title));
+    stage.appendChild(el('p','lead',s.lead));
+    var card=el('div','card');
+    s.fields.filter(vis).forEach(function(f){
+      var w=el('div','field'); w.dataset.id=f.id;
+      var l=el(f.type==='yn'?'span':'label','lbl',f.label);
+      if(f.type!=='yn') l.htmlFor=f.id;
+      if(f.req){var r=el('span','req',' *'); l.appendChild(r)}
+      w.appendChild(l);
+      if(f.hint) w.appendChild(el('div','hint',f.hint));
+      w.appendChild(control(f));
+      w.appendChild(el('div','msg','Заполните это поле'));
+      card.appendChild(w);
+    });
+    stage.appendChild(card);
+    var nav=el('div','nav');
+    if(step>0){var b=el('button','btn ghost','Назад'); b.type='button'; b.onclick=function(){step--;render()}; nav.appendChild(b)}
+    var n=el('button','btn',step===S.length-1?'К проверке':'Далее'); n.type='button';
+    n.onclick=function(){ if(validate(s)){step++;render()} };
+    nav.appendChild(n);
+    stage.appendChild(nav);
+  }
+
+  function validate(s){
+    var first=null;
+    s.fields.filter(vis).forEach(function(f){
+      var w=stage.querySelector('[data-id="'+f.id+'"]'); if(!w) return;
+      var v=(data[f.id]||'').trim(), bad=f.req&&!v, m=w.querySelector('.msg');
+      if(!bad&&v){
+        if(f.id==='iin'&&!/^\d{12}$/.test(v)){bad=true;m.textContent='ИИН состоит из 12 цифр'}
+        if(f.type==='email'&&!/^\S+@\S+\.\S+$/.test(v)){bad=true;m.textContent='Проверьте адрес почты'}
+      } else if(bad){m.textContent='Заполните это поле'}
+      w.classList.toggle('err',bad);
+      if(bad&&!first) first=w;
+    });
+    if(first){first.scrollIntoView({behavior:'smooth',block:'center'});return false}
+    return true;
+  }
+
+  function lines(){
+    var out=[];
+    S.forEach(function(s){
+      out.push('— '+s.name.toUpperCase());
+      s.fields.filter(vis).forEach(function(f){
+        var v=(data[f.id]||'').trim(); if(v) out.push(f.label+': '+v);
+      });
+    });
+    return out;
+  }
+
+  function renderReview(){
+    stage.appendChild(el('h1',null,'Проверьте ответы'));
+    stage.appendChild(el('p','lead','Убедитесь, что имя, даты и номер паспорта совпадают с документами.'));
+    var card=el('div','card sum');
+    S.forEach(function(s,i){
+      var sec=el('section'); sec.appendChild(el('h2',null,s.name));
+      var dl=el('dl');
+      s.fields.filter(vis).forEach(function(f){
+        var v=(data[f.id]||'').trim(); if(!v) return;
+        var g=el('div'); g.appendChild(el('dt',null,f.label)); g.appendChild(el('dd',null,v)); dl.appendChild(g);
+      });
+      sec.appendChild(dl);
+      var e=el('button','btn ghost','Изменить'); e.type='button'; e.style.marginTop='10px';
+      e.onclick=function(){step=i;render()}; sec.appendChild(e);
+      card.appendChild(sec);
+    });
+    var chk=el('label','chk'); var cb=el('input'); cb.type='checkbox'; cb.id='agree';
+    chk.appendChild(cb);
+    chk.appendChild(el('span',null,'Подтверждаю, что данные верны, и разрешаю Qazaq Alliance заполнить и подать анкету DS-160 от моего имени.'));
+    card.appendChild(chk);
+    stage.appendChild(card);
+    var nav=el('div','nav');
+    var b=el('button','btn ghost','Назад'); b.type='button'; b.onclick=function(){step--;render()}; nav.appendChild(b);
+    var s=el('button','btn','Отправить'); s.type='button'; s.disabled=true;
+    cb.onchange=function(){s.disabled=!cb.checked};
+    s.onclick=function(){submit(s)};
+    nav.appendChild(s);
+    stage.appendChild(nav);
+  }
+
+  function submit(btn){
+    var code=Math.random().toString(36).slice(2,8).toUpperCase();
+    done(code,false);
+  }
+
+  function done(code,saved){
+    document.getElementById('prog').style.width='100%';
+    document.getElementById('step-label').textContent='Готово';
+    document.getElementById('step-name').textContent='';
+    stage.textContent='';
+    stage.appendChild(el('h1',null,saved?'Анкета отправлена':'Анкета готова'));
+    stage.appendChild(el('p','lead',saved?'Менеджер свяжется с вами и уточнит детали. Ваш номер заявки:':'Отправьте ответы менеджеру Qazaq Alliance в WhatsApp. Ваш номер заявки:'));
+    var card=el('div','card');
+    card.appendChild(el('div','code',code));
+    var text='Заявка '+code+'\n\n'+lines().join('\n');
+    if(!saved){
+      var pre=el('pre','copy',text); card.appendChild(pre);
+      var cp=el('button','btn','Скопировать ответы'); cp.type='button';
+      cp.onclick=function(){
+        var ok=function(){cp.textContent='Скопировано'};
+        var fb=function(){var r=document.createRange(); r.selectNodeContents(pre); var sl=getSelection(); sl.removeAllRanges(); sl.addRange(r); cp.textContent='Текст выделен, скопируйте его'};
+        try{navigator.clipboard.writeText(text).then(ok,fb)}catch(e){fb()}
+      };
+      var wa=el('a','btn','Отправить в WhatsApp'); wa.href='https://wa.me/'+WA_NUMBER+'?text='+encodeURIComponent(text);
+      wa.target='_blank'; wa.rel='noopener'; wa.style.textDecoration='none'; wa.style.textAlign='center';
+      card.insertBefore(wa,pre);
+      card.appendChild(cp);
+    }
+    card.appendChild(el('div','lbl','Подготовьте к встрече'));
+    var ul=el('ul','todo');
+    ['Загранпаспорт и копию страницы с фото','Фото 5×5 см на светлом фоне, сделанное за последние 6 месяцев','Справку с работы или учёбы, выписку со счёта','Прошлые визы США, если были'].forEach(function(t){ul.appendChild(el('li',null,t))});
+    card.appendChild(ul);
+    stage.appendChild(card);
+    try{localStorage.removeItem(KEY)}catch(e){}
+  }
+
+  render();
+})();
+</script>
+</body>
+</html>
